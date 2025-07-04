@@ -10,7 +10,7 @@ from users.models import User
 
 
 class Command(BaseCommand):
-    help = 'Generates test data for recommendation algorithms'
+    help = 'Генерация тестовых данных'
     base_genres = []
 
     def add_arguments(self, parser):
@@ -38,14 +38,14 @@ class Command(BaseCommand):
         num_users = options['num_users']
         num_actors = options['num_actors']
 
-        self.stdout.write('Deleting old data...')
+        self.stdout.write('Удаление старых данных...')
         Genre.objects.all().delete()
         Actor.objects.all().delete()
         Movie.objects.all().delete()
         User.objects.all().delete()
         Interaction.objects.all().delete()
 
-        self.stdout.write('Creating genres...')
+        self.stdout.write('Создание жанров...')
         genres = [
             'Детективы', 'Новеллы', 'Наука',
             'Исторические', 'Фантастика', 'Триллеры']
