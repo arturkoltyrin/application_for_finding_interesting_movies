@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Recommendations</h2>
+    <h2>Рекомендации</h2>
 
     <div class="accordion" id="recommendationAccordion">
-        <!-- PageRank -->
+
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingPagerank">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePagerank">
-                    PageRank Recommendations
+                    Рейтинг
                 </button>
             </h2>
             <div id="collapsePagerank" class="accordion-collapse collapse show" data-bs-parent="#recommendationAccordion">
@@ -18,17 +18,16 @@
                     {% for recommendation in pagerank_recommendations %}
                         {% include 'movies/includes/movie_card.html' with movie=recommendation.movie score=recommendation.score %}
                     {% empty %}
-                        <p>No recommendations available.</p>
+                        <p>Нет доступных рекомендаций.</p>
                     {% endfor %}
                 </div>
             </div>
         </div>
 
-        <!-- Collaborative Filtering -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCollaborative">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCollaborative">
-                    Collaborative Filtering Recommendations
+                    Рекомендации по совместной фильтрации
                 </button>
             </h2>
             <div id="collapseCollaborative" class="accordion-collapse collapse" data-bs-parent="#recommendationAccordion">
@@ -36,17 +35,16 @@
                     {% for recommendation in collaborative_recommendations %}
                         {% include 'movies/includes/movie_card.html' with movie=recommendation.movie predicted_rate=recommendation.predicted_rating %}
                     {% empty %}
-                        <p>No recommendations available.</p>
+                        <p>Нет доступных рекомендаций.</p>
                     {% endfor %}
                 </div>
             </div>
         </div>
 
-        <!-- K-NN Nearest Neighbors -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingKNN">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKNN">
-                    Nearest Neighbors (K-NN)
+                    Генерация по методу ближайшего соседа (k-means)
                 </button>
             </h2>
             <div id="collapseKNN" class="accordion-collapse collapse" data-bs-parent="#recommendationAccordion">
@@ -54,7 +52,7 @@
                     {% for user in knn_recommendations %}
                         {% include 'movies/includes/user_card.html' with user=user %}
                     {% empty %}
-                        <p>No similar users found.</p>
+                        <p>Похожих пользователей не найдено.</p>
                     {% endfor %}
                 </div>
             </div>

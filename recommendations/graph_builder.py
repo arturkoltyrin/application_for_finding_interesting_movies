@@ -15,7 +15,7 @@ def build_user_movie_graph():
 
     for interaction in Interaction.objects.select_related('user', 'movie'):
         user_node = f'user_{interaction.user.id}'
-        movie_node = f'movie_{interaction.book.id}'
+        movie_node = f'movie_{interaction.movie.id}'
         weight = interaction.rating if interaction.rating else 0.5
         G.add_edge(user_node, movie_node, weight=weight)
 

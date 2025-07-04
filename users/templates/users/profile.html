@@ -16,22 +16,22 @@
             <div class="ms-4">
                 <h1 class="mb-0">{{ profile_user.email }}</h1>
                 {% if user == profile_user %}
-                    <a class="btn btn-outline-primary mt-2" href="{% url 'users:edit-profile' %}">Edit Profile</a>
+                    <a class="btn btn-outline-primary mt-2" href="{% url 'users:edit-profile' %}">Редактировать профиль</a>
                 {% endif %}
             </div>
         </div>
 
-        <h3 class="mt-4">Preferred Genres</h3>
+        <h3 class="mt-4">Предпочитаемые жанры</h3>
         <div class="d-flex flex-wrap">
             {% for genre in profile_user.preferred_genres.all %}
                 <span class="badge bg-secondary me-2 mb-2">{{ genre.name }}</span>
             {% empty %}
-                <p class="text-muted">No preferred genres listed.</p>
+                <p class="text-muted">Нет предпочитаемых жанров.</p>
             {% endfor %}
         </div>
 
         {% if user == profile_user %}
-        <h3 class="mt-4">Movie Ratings</h3>
+        <h3 class="mt-4">Рейтинг фильмов</h3>
         <div class="list-group">
             {% for rating in ratings %}
                 <a href="{% url 'movies:movie-detail' rating.movie.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -39,7 +39,7 @@
                     <span class="badge bg-primary rounded-pill">{{ rating.rating }}/5</span>
                 </a>
             {% empty %}
-                <p class="text-muted">No movies rated yet.</p>
+                <p class="text-muted">Пока рейтинга фильмов нет.</p>
             {% endfor %}
         </div>
         {% endif %}

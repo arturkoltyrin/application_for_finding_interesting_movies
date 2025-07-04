@@ -2,12 +2,12 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <div class="container">
-    <h1 class="mt-5 mb-5">Log in</h1>
+    <h1 class="mt-5 mb-5">Регистрация</h1>
     <form method="post" enctype="multipart/form-data" class="needs-validation mb-1" novalidate>
         {% csrf_token %}
         {{ form.non_field_errors }}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary mt-3">Log in</button>
+        <button type="submit" class="btn btn-primary mt-3">Регистрация</button>
     </form>
 </div>
 {% endblock %}

@@ -7,10 +7,10 @@ from movies.models import Actor, Genre, Movie
 class ActorAdmin(admin.ModelAdmin):
     list_display = (
         'name',
-        'bio')
+        'surname')
     search_fields = (
         'name',
-        'bio',)
+        'surname',)
 
 
 @admin.register(Genre)

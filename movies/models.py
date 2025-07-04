@@ -18,7 +18,7 @@ class Genre(models.Model):
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
-    bio = models.TextField()
+    surname = models.TextField()
     class Meta:
         verbose_name = 'Actor'
         verbose_name_plural = 'Actors'

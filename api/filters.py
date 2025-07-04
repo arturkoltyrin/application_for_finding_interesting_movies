@@ -14,11 +14,11 @@ class GenreFilter(filters.FilterSet):
 
 class ActorFilter(filters.FilterSet):
     name = filters.CharFilter(lookup_expr='icontains')
-    bio = filters.CharFilter(lookup_expr='icontains')
+    surname = filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Actor
-        fields = ['name', 'bio']
+        fields = ['name', 'surname']
 
 
 class MovieFilter(filters.FilterSet):

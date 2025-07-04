@@ -47,32 +47,32 @@ class Command(BaseCommand):
 
         self.stdout.write('Creating genres...')
         genres = [
-            'Detective', 'Novel', 'Science',
-            'History', 'Fantasy', 'Thriller']
+            'Детективы', 'Новеллы', 'Наука',
+            'Исторические', 'Фантастика', 'Триллеры']
 
         genre_objects = [Genre(name=name) for name in genres]
         Genre.objects.bulk_create(genre_objects)
         genres = Genre.objects.all()
-        self.stdout.write(f'Creating {num_actors} actors...')
-        actors = [Actor(name=f'Actor {i}', bio=f'Actor {i} Bio') for i in range(1, num_actors + 1)]
+        self.stdout.write(f'Создание {num_actors} актеров...')
+        actors = [Actor(name=f'Actor {i}', surname=f'Актер {i} Фамилия') for i in range(1, num_actors + 1)]
         Actor.objects.bulk_create(actors)
         actors = Actor.objects.all()
-        self.stdout.write(f'Creating {num_movies} movies...')
+        self.stdout.write(f'Создание {num_movies} Фильмов...')
         movies = []
         for i in range(1, num_movies + 1):
             movie = Movie(
-                title=f'Movie {i}',
+                title=f'Фильм {i}',
                 actor=random.choice(actors),
-                description=f'Description for Movie {i}',
+                description=f'Описание фильма {i}',
                 publish_date=timezone.now().date())
             movies.append(movie)
         Movie.objects.bulk_create(movies)
-        self.stdout.write('Adding Genres to Movies...')
+        self.stdout.write('Добавить жанр...')
         all_movies = Movie.objects.all()
         for movie in all_movies:
             movie.genres.add(*random.sample(list(genres), k=random.randint(1, 3)))
 
-        self.stdout.write('Creating Users...')
+        self.stdout.write('Создать пользователя...')
         for i in range(1, num_users + 1):
             user = User.objects.create_user(
                 email=f'user{i}@example.com',
@@ -80,7 +80,7 @@ class Command(BaseCommand):
             )
             user.preferred_genres.add(*random.sample(list(genres), k=random.randint(2, 4)))
 
-        self.stdout.write('Creating interactions...')
+        self.stdout.write('Создание взаимодействия...')
         interactions = []
         all_movies = list(Movie.objects.all())
         all_users = User.objects.all()
@@ -90,7 +90,7 @@ class Command(BaseCommand):
             preferred_movies = Movie.objects.filter(genres__in=user_preferred_genres).distinct()
             other_movies = Movie.objects.exclude(genres__in=user_preferred_genres).distinct()
 
-            num_interactions = random.randint(10, 21)
+            num_interactions = random.randint(10, 24)
             num_preferred = int(num_interactions * 0.7)
             num_other = num_interactions - num_preferred
 
@@ -114,7 +114,7 @@ class Command(BaseCommand):
 
         Interaction.objects.bulk_create(interactions)
 
-        self.stdout.write('Updating average ratings...')
+        self.stdout.write('Обновление средних оценок...')
         movies_to_update = Movie.objects.filter(interaction__isnull=False).distinct()
         for movie in movies_to_update:
             movie.average_rating = Interaction.objects.filter(movie=movie).aggregate(
@@ -124,8 +124,8 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS(
             f'Successfully created:\n'
-            f'- {Genre.objects.count()} genres\n'
-            f'- {Actor.objects.count()} actors\n'
-            f'- {Movie.objects.count()} movies\n'
-            f'- {User.objects.count()} users\n'
-            f'- {Interaction.objects.count()} interactions'))
+            f'- {Genre.objects.count()} жанры\n'
+            f'- {Actor.objects.count()} актеры\n'
+            f'- {Movie.objects.count()} фильмы\n'
+            f'- {User.objects.count()} пользователи\n'
+            f'- {Interaction.objects.count()} взаимодействие'))

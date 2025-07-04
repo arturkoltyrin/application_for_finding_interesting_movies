@@ -32,7 +32,7 @@ def find_k_nearest_neighbors(user_id, k=5):
 
     for interaction in interactions:
         user_idx = user_to_index[interaction.user_id]
-        movie_idx = movie_to_index[interaction.book_id]
+        movie_idx = movie_to_index[interaction.movie_id]
         user_movie_matrix[user_idx, movie_idx] = interaction.rating or 0.0
 
     user_similarity = cosine_similarity(user_movie_matrix)

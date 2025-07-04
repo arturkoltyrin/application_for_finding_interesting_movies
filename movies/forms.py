@@ -15,11 +15,11 @@ class GenreForm(StyleFormMixin, forms.ModelForm):
 
 
 class ActorForm(StyleFormMixin, forms.ModelForm):
-    bio = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
 
     class Meta:
         model = Actor
-        fields = ['name', 'bio']
+        fields = ['name', 'surname']
 
 
 class MovieForm(StyleFormMixin, forms.ModelForm):

@@ -60,7 +60,7 @@ def get_statistics():
     users_count = User.objects.all().count()
     one_week_ago = timezone.now() - timezone.timedelta(days=7)
     new_movies_week_count = Movie.objects.filter(publish_date__gte=one_week_ago).count()
-    top_rated_books = Movie.objects.annotate(
+    top_rated_movies = Movie.objects.annotate(
         avg_rating=Avg('interaction__rating'),
         rating_count=Count('interaction__rating')
     ).order_by('-avg_rating', '-rating_count')[:5]

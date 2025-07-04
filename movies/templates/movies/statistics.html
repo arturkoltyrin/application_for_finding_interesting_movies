@@ -5,29 +5,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-7">
-            <a class="btn btn-outline-secondary mt-3 mb-3" href="{% url 'movies:home' %}">Home</a>
+            <a class="btn btn-outline-secondary mt-3 mb-3" href="{% url 'movies:home' %}">Домой</a>
 
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Statistics</h5>
+                    <h5 class="mb-0">Статистика</h5>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total movies:</span>
+                        <span>Всего фильмов:</span>
                         <strong>{{ movies_count }}</strong>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total users:</span>
+                        <span>Всего пользователей:</span>
                         <strong>{{ users_count }}</strong>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>New movies this week:</span>
+                        <span>Новые фильмы на этой неделе:</span>
                         <strong>{{ new_movies_week_count }}</strong>
                     </li>
 
-                    <!-- Top Rated Movies -->
                     <li class="list-group-item">
-                        <h6 class="mb-2">Top Rated Movies:</h6>
+                        <h6 class="mb-2">Фильмы с самым высоким рейтингом:</h6>
                         <ul class="list-unstyled ps-2">
                             {% for movie in top_rated_movies %}
                                 <li class="mb-1">
@@ -36,14 +35,13 @@
                                     </a>
                                 </li>
                             {% empty %}
-                                <li class="text-muted">No movies found.</li>
+                                <li class="text-muted">Нет найденных фильмов.</li>
                             {% endfor %}
                         </ul>
                     </li>
 
-                    <!-- Top Active Users -->
                     <li class="list-group-item">
-                        <h6 class="mb-2">Top Active Users:</h6>
+                        <h6 class="mb-2">Активные пользователи:</h6>
                         <ul class="list-unstyled ps-2">
                             {% for user in top_active_users %}
                                 <li class="mb-1">
@@ -52,7 +50,7 @@
                                     </a>
                                 </li>
                             {% empty %}
-                                <li class="text-muted">No active users found.</li>
+                                <li class="text-muted">Активных пользователей не найдено.</li>
                             {% endfor %}
                         </ul>
                     </li>

@@ -9,7 +9,7 @@
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <p>
-                    Name:
+                    Имя:
                 </p>
                 <p>
                     {{ actor.name }}
@@ -17,24 +17,24 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <p>
-                    Bio:
+                    Фамилия:
                 </p>
                 <p>
-                    {{ actor.bio }}
+                    {{ actor.surname }}
                 </p>
             </li>
         </ul>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
         <a href="{% url 'movies:actors' %}" class="btn btn-outline-secondary">
-            Back
+            Назад
         </a>
         {% if user.is_staff %}
         <a href="{% url 'movies:actor-update' actor.pk %}" class="btn btn-outline-secondary">
-            Edit
+            Редактировать
         </a>
         <a href="{% url 'movies:actor-delete' actor.pk %}" class="btn btn-outline-danger">
-            Delete
+            Удалить
         </a>
         {% endif %}
     </div>

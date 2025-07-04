@@ -7,8 +7,8 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        <a href="{% url 'movies:genres' %}" class="btn btn-secondary mt-3">Cancel</a>
+        <button type="submit" class="btn btn-primary mt-3">Предоставить</button>
+        <a href="{% url 'movies:genres' %}" class="btn btn-secondary mt-3">Отмена</a>
     </form>
 </div>
 {% endblock %}

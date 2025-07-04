@@ -24,7 +24,7 @@ class ActorViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
     filterset_class = ActorFilter
     ordering_fields = ['name']
-    search_fields = ['name', 'bio']
+    search_fields = ['name', 'surname']
     permission_classes = [IsStaffOrReadOnly]
 
 
