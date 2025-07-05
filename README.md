@@ -14,14 +14,18 @@ pip install -r requirements.txt
 4. Установите и запустите Redis
 redis-server
 
-5. Подключение БД и Redis
-SECRET_KEY=
-POSTGRES_DB=
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_HOST=
-POSTGRES_PORT=
-LOCATION=
+5. Подключите БД
+Убедитесь, что PostgreSQL установлен и запущен.
+Используйте утилиту pgAdmin для запуска сервера.
+
+Создайте файл .env и заполните его по образцу .env.sample:
+
+SECRET_KEY='django-insecure-1m9k*p=m=4ujak=alqo^b%+p$5u^ra3vu5+2*+a!1k(6oeeq0v'
+POSTGRES_USER = postgres
+POSTGRES_PASSWORD = <пароль>
+POSTGRES_HOST = localhost
+POSTGRES_PORT = 5432
+LOCATION=<локальный путь>
 
 6. Примените миграции:
 python manage.py migrate
