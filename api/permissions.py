@@ -17,7 +17,7 @@ class IsStaffOrReadOnly(permissions.BasePermission):
 
 class IsOwnerOrStaff(permissions.BasePermission):
     def has_permission(self, request, view):
-        if request.method == 'GET':
+        if request.method == "GET":
             return request.user.is_authenticated
         return True
 

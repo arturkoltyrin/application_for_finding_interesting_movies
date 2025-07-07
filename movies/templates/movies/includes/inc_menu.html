@@ -22,7 +22,7 @@
                     <li><a href="{% url 'movies:home' %}" class="btn">Домой</a></li>
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'users:my-profile' %}" class="btn"> Профиль </a>
+                        <a href="{% url 'users:profile' %}" class="btn"> Профиль </a>
                     </li>
                     <li>
                         <a href="{% url 'users:edit-profile' %}" class="btn">Редактировать профиль</a>
@@ -36,7 +36,7 @@
                     {% else %}
                     <li>
                         <a href="{% url 'users:login' %}" class="btn">
-                            Регистрация
+                            Вход
                         </a>
                     </li>
                     <li>

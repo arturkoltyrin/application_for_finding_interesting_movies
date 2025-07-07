@@ -14,7 +14,7 @@
             <a href="{% url 'movies:statistics' %}" class="btn btn-success w-100 mt-2 mb-2">Статистика</a>
             <a href="{% url 'movies:recommendations' %}" class="btn btn-success w-100 mt-2 mb-2">Рекомендации</a>
             {% else %}
-            <a href="{% url 'users:login' %}" class="btn btn-success w-100 mt-2 mb-2">Регистрация</a>
+            <a href="{% url 'users:login' %}" class="btn btn-success w-100 mt-2 mb-2">Вход</a>
             <a href="{% url 'users:register' %}" class="btn btn-success w-100 mt-2 mb-2">Зарегистрироваться</a>
             {% endif %}
         </div>

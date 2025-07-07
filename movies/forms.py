@@ -1,17 +1,22 @@
 from django import forms
 
-from movies.models import Genre, Actor, Movie
+from movies.models import Actor, Genre, Movie
 
 
 class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if not isinstance(field.widget, forms.CheckboxSelectMultiple):
+                field.widget.attrs["class"] = "form-control"
 
 
 class GenreForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Genre
-        fields = ['name', ]
+        fields = [
+            "name",
+        ]
 
 
 class ActorForm(StyleFormMixin, forms.ModelForm):
@@ -19,19 +24,18 @@ class ActorForm(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = Actor
-        fields = ['name', 'surname']
+        fields = ["name", "surname"]
 
 
 class MovieForm(StyleFormMixin, forms.ModelForm):
-    cover = forms.ImageField(required=False, label='Cover')
-    actor = forms.ModelChoiceField(
-        queryset=Actor.objects.all(),
-        label='Actor')
+    cover = forms.ImageField(required=False, label="Cover")
+    actor = forms.ModelChoiceField(queryset=Actor.objects.all(), label="Actor")
     genres = forms.ModelMultipleChoiceField(
         queryset=Genre.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        label='Genres')
+        label="Genres",
+    )
 
     class Meta:
         model = Movie
-        fields = ['title', 'cover', 'actor', 'description', 'genres']
+        fields = ["title", "cover", "actor", "description", "genres"]

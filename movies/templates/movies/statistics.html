@@ -45,7 +45,7 @@
                         <ul class="list-unstyled ps-2">
                             {% for user in top_active_users %}
                                 <li class="mb-1">
-                                    <a href="{% url 'users:profile' user.pk %}" class="text-decoration-none">
+                                    <a href="{% url 'users:profile' %}" class="text-decoration-none">
                                         {{ user.email }}
                                     </a>
                                 </li>

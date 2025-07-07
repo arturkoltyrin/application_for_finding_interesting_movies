@@ -16,8 +16,8 @@ def find_k_nearest_neighbors(user_id, k=5):
             return cached_result
 
     interactions = Interaction.objects.all()
-    users = list(set(interactions.values_list('user_id', flat=True)))
-    movies = list(set(interactions.values_list('movie_id', flat=True)))
+    users = list(set(interactions.values_list("user_id", flat=True)))
+    movies = list(set(interactions.values_list("movie_id", flat=True)))
 
     if not users or not movies:
         return []
@@ -38,7 +38,7 @@ def find_k_nearest_neighbors(user_id, k=5):
     user_similarity = cosine_similarity(user_movie_matrix)
 
     target_user_idx = user_to_index[user_id]
-    nearest_neighbors = np.argsort(user_similarity[target_user_idx])[-k - 1:-1][::-1]
+    nearest_neighbors = np.argsort(user_similarity[target_user_idx])[-k - 1 : -1][::-1]
 
     if not nearest_neighbors.size:
         return []
