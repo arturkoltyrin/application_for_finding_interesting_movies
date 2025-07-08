@@ -1,0 +1,23 @@
+{% extends 'movies/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-5 text-center">Сервис для поиска интересных фильмов</h2>
+    <div class="row d-flex justify-content-center align-items-center mt-3 mb-3">
+        <div class="col-4 text-center">
+            {% if user.is_staff %}
+            <a href="{% url 'movies:genres' %}" class="btn btn-success w-100 mt-2 mb-2">Жанры</a>
+            <a href="{% url 'movies:actors' %}" class="btn btn-success w-100 mt-2 mb-2">Актеры</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a href="{% url 'movies:movies' %}" class="btn btn-success w-100 mt-2 mb-2">Фильмы</a>
+            <a href="{% url 'movies:statistics' %}" class="btn btn-success w-100 mt-2 mb-2">Статистика</a>
+            <a href="{% url 'movies:recommendations' %}" class="btn btn-success w-100 mt-2 mb-2">Рекомендации</a>
+            {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-success w-100 mt-2 mb-2">Вход</a>
+            <a href="{% url 'users:register' %}" class="btn btn-success w-100 mt-2 mb-2">Зарегистрироваться</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'movies/base.html' %}
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-7">
+            <a class="btn btn-outline-secondary mt-3 mb-3" href="{% url 'movies:home' %}">Домой</a>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Статистика</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Всего фильмов:</span>
+                        <strong>{{ movies_count }}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Всего пользователей:</span>
+                        <strong>{{ users_count }}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Новые фильмы на этой неделе:</span>
+                        <strong>{{ new_movies_week_count }}</strong>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h6 class="mb-2">Фильмы с самым высоким рейтингом:</h6>
+                        <ul class="list-unstyled ps-2">
+                            {% for movie in top_rated_movies %}
+                                <li class="mb-1">
+                                    <a href="{% url 'movies:movie-detail' movie.pk %}" class="text-decoration-none">
+                                        {{ movie.title }} - <span class="text-muted">{{ movie.actor.name }}</span>
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="text-muted">Нет найденных фильмов.</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h6 class="mb-2">Активные пользователи:</h6>
+                        <ul class="list-unstyled ps-2">
+                            {% for user in top_active_users %}
+                                <li class="mb-1">
+                                    <a href="{% url 'users:profile' %}" class="text-decoration-none">
+                                        {{ user.email }}
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="text-muted">Активных пользователей не найдено.</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

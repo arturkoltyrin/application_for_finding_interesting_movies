@@ -1,0 +1,75 @@
+{% extends 'movies/base.html' %}
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                {% if movie.cover %}
+                    <img src="{{ movie.cover.url }}" class="img-fluid rounded border" alt="{{ movie.title }}" style="max-height: 300px;">
+                {% else %}
+                    <div class="d-flex align-items-center justify-content-center bg-light border rounded"
+                         style="width: 100%; height: 300px; font-size: 1.5rem; color: #666;">
+                        Нет изображения
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-8">
+                <h2 class="mb-3">{{ movie.title }}</h2>
+                <p><strong>Главный актер:</strong> {{ movie.actor.name }}</p>
+
+                <p><strong>Жанры:</strong>
+                    {% for genre in movie.genres.all %}
+                        <span class="badge bg-secondary me-1">{{ genre.name }}</span>
+                    {% empty %}
+                        <span class="text-muted">Нет доступных жанров</span>
+                    {% endfor %}
+                </p>
+
+                <p><strong>Средний рейтинг:</strong> <span class="badge bg-primary">{{ movie.average_rating|floatformat:2 }}</span></p>
+
+                {% if user_rating %}
+                    <p><strong>Ваш рейтинг:</strong>
+                        <span class="badge {% if user_rating >= 4 %}bg-success{% elif user_rating >= 2 %}bg-warning{% else %}bg-danger{% endif %}">
+                            {{ user_rating }}/5
+                        </span>
+                    </p>
+                {% endif %}
+
+                <div class="accordion mt-3" id="descriptionAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingDesc">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc">
+                                Смотреть описание
+                            </button>
+                        </h2>
+                        <div id="collapseDesc" class="accordion-collapse collapse" data-bs-parent="#descriptionAccordion">
+                            <div class="accordion-body">
+                                {{ movie.description|default:"No description available" }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ rating_form.as_p }}
+                        <button type="submit" class="btn btn-primary">Отправить рейтинг</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <a href="{% url 'movies:movies' %}" class="btn btn-outline-secondary">Назад</a>
+            {% if user.is_staff %}
+                <a href="{% url 'movies:movie-update' movie.pk %}" class="btn btn-outline-primary">Рейтинг</a>
+                <a href="{% url 'movies:movie-delete' movie.pk %}" class="btn btn-outline-danger">Удалить</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

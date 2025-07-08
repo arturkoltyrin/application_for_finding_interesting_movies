@@ -1,0 +1,31 @@
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            {% if movie.cover %}
+            <img src="{{ movie.cover }}" class="img-fluid rounded-start" alt="Movie Cover">
+            {% else %}
+            <div class="no-cover">
+                {{ movie.title }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <h6 class="card-subtitle text-muted">by {{ movie.actor.name }}</h6>
+                <p class="card-text">{{ movie.description|truncatewords:20 }}</p>
+                {% if score %}
+                <p><strong>Score:</strong> {{ score|floatformat:5 }}</p>
+                {% endif %}
+                {% if predicted_rate %}
+                <p><strong>Predicted rate:</strong> {{ predicted_rate|floatformat:2 }}</p>
+                {% endif %}
+                {% if movie.id %}
+                <a href="{% url 'movies:movie-detail' movie.id %}" class="btn btn-primary">View</a>
+                {% else %}
+                <p class="text-muted">Подробности фильма недоступны</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
